@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Menu {
     private static Scanner sc = new Scanner(System.in);
-    public static List<String> arrayOfContacts = new ArrayList<>();
+    public static ArrayList<String> arrayOfContacts = new ArrayList<>();
     public static ReadWrite contacts = new ReadWrite("data","contacts.txt");
 
     public static void main(String[] args) {
-        arrayOfContacts = contacts.getContacts();
+        arrayOfContacts.addAll(contacts.getContacts());
         mainMenu();
     }
 
@@ -94,10 +94,13 @@ public class Menu {
              }
              System.out.println("please enter the id of the contact you would like to delete:");
             try {
+                arrayOfContacts.remove(sc.nextInt());
+                for(String contact: arrayOfContacts){
+                    System.out.println("undeleted contact: "+contact);
+                }
+//                contacts.WriteContacts(arrayOfContacts);
+//                System.out.println("Contact deleted");
 
-                arrayOfContacts.remove(sc.nextLine());
-                contacts.WriteContacts(arrayOfContacts);
-                System.out.println("Contact deleted");
             } catch (Exception e){
                 System.out.println("Unable to delete");
             }
