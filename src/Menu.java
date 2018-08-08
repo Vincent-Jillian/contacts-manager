@@ -40,9 +40,14 @@ public class Menu {
                 goHome();
                 break;
             case "3":
+                System.out.println("Please enter the name you would like to search.");
+                String input = sc.nextLine();
+                searchContact(input);
                 goHome();
                 break;
             case "4":
+                System.out.println("Enter the name you would like to delete");
+                deleteFeature(sc.nextLine());
                 goHome();
                  break;
             default:
@@ -60,11 +65,42 @@ public class Menu {
          }
          public static void searchContact(String input){
                 for(String contact: arrayOfContacts){
-                    String[] splitContact = contact.split("|",3);
+                    String[] splitContact = contact.split("\\|",-1);
+//                    for(String part: splitContact){
+//                        System.out.println(part);
+//                    }
                     if(input.equalsIgnoreCase(splitContact[0])){
                         System.out.println(contact);
                     }
                 }
+         }
+
+         public static void deleteFeature(String input){
+            ArrayList<Integer>numberList = new ArrayList<>();
+            int counter = 0;
+
+             for(String contact: arrayOfContacts){
+                 String[] splitContact = contact.split("\\|",-1);
+//                    for(String part: splitContact){
+//                        System.out.println(part);
+//                    }
+                 if(input.equalsIgnoreCase(splitContact[0])){
+                     numberList.add(counter);
+                 }
+                 counter++;
+             }
+             for(int index: numberList){
+                 System.out.println("id: "+index+" "+arrayOfContacts.get(index));
+             }
+             System.out.println("please enter the id of the contact you would like to delete:");
+            try {
+
+                arrayOfContacts.remove(sc.nextLine());
+                contacts.WriteContacts(arrayOfContacts);
+                System.out.println("Contact deleted");
+            } catch (Exception e){
+                System.out.println("Unable to delete");
+            }
          }
 
          public static void goHome(){
