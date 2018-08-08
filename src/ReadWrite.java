@@ -11,11 +11,13 @@ public class ReadWrite {
     private List<String> readString;
     private String directory;
     private String filename;
-    private Path listOfContactsPath = Paths.get(directory,filename );
+    private Path listOfContactsPath;
+
 
     public ReadWrite(String directory, String filename) {
         this.directory = directory;
         this.filename = filename;
+        listOfContactsPath = Paths.get(directory,filename );
     }
 
     public ReadWrite(){}
@@ -24,6 +26,7 @@ public class ReadWrite {
         try {
             this.readString = Files.readAllLines(listOfContactsPath);
         } catch (Exception e){
+            readString = new ArrayList<>();
             readString.add(e.toString());
         }
         return readString;
@@ -37,22 +40,6 @@ public class ReadWrite {
         }
     }
 
-    public List<String> getReadString() {
-        return readString;
-    }
-
-    public void setReadString(List<String> readString) {
-        this.readString = readString;
-    }
-
-    public Path getListOfContactsPath() {
-        return listOfContactsPath;
-    }
-
-    public void setListOfContactsPath(Path listOfContactsPath) {
-        this.listOfContactsPath = listOfContactsPath;
-    }
-
     //    public void AddContact(String contact){
 //        try {
 //            Files.write(listOfContactsPath, contact, StandardOpenOption.APPEND);
@@ -60,6 +47,11 @@ public class ReadWrite {
 //            e.printStackTrace();
 //        }
 //    }
+
+
+    public List<String> getReadString() {
+        return readString;
+    }
 
     public String getDirectory() {
         return directory;
@@ -77,12 +69,11 @@ public class ReadWrite {
         this.filename = filename;
     }
 
-    public static void main(String[] args) {
-        ReadWrite readWrite = new ReadWrite("../data", "test.txt");
-        readWrite.setDirectory("../data");
-        readWrite.setFilename("test.txt");
-        System.out.println(readWrite.getFilename());
-        Path testPath = Paths.get("../data", "test.txt");
-        System.out.println(Files.exists(testPath));
-    }
+//    public static void main(String[] args) {
+//        ReadWrite readWrite = new ReadWrite("data","contacts.txt");
+//        readWrite.getContacts();
+//        for(String item: readWrite.getReadString()){
+//            System.out.println(item);
+//        }
+//    }
 }
