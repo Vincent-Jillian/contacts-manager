@@ -7,7 +7,6 @@ import java.util.List;
 
 public class ReadWrite {
 
-
     private List<String> readString;
     private String directory;
     private String filename;
@@ -32,7 +31,7 @@ public class ReadWrite {
         return readString;
     }
 
-    public void WriteContacts(ArrayList<String> contact){
+    public void WriteContacts(List<String> contact){
         try {
             Files.write(listOfContactsPath, contact);
         } catch (Exception e) {
@@ -69,11 +68,6 @@ public class ReadWrite {
         this.filename = filename;
     }
 
-//    public static void main(String[] args) {
-//        ReadWrite readWrite = new ReadWrite("data","contacts.txt");
-//        readWrite.getContacts();
-//        for(String item: readWrite.getReadString()){
-//            System.out.println(item);
-//        }
-//    }
+
+
 }
